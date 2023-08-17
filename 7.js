@@ -5,6 +5,34 @@ function task7() {
   // Створюємо новий проміс.
   // Використовуємо функцію setInterval, щоб виконати функцію кожну секунду.
   // Отримаємо поточну дату та час
+  function intervalPromise() {
+    return new Promise((resolve, reject) => {
+      const intervalId = setInterval(() => {
+        const currentDate = new Date();
+        const seconds = currentDate.getSeconds();
+        console.log(`Поточні секунди: ${seconds}`);
+        if (seconds % 10 === 0) {
+          clearInterval(intervalId);
+          resolve("Поточні секунди кратні 10!");
+        } else if (seconds % 3 === 0) {
+          clearInterval(intervalId);
+          reject("Поточні секунди кратні 3!");
+        }
+      }, 1000);
+    });
+  }
+  intervalPromise()
+    .then((value) => {
+      console.log(`Проміс зарезолвився з значенням: ${value}`);
+    })
+    .catch((error) => {
+      console.error(`Проміс відхилився з помилкою: ${error}`);
+    })
+    .finally(() => {
+      console.log("Проміс завершено");
+    });
+  
+  
   // Отримуємо секунди з поточної дати
   // Виводимо в консоль повідомлення `Поточні секунди: ${seconds}`
   // Якщо поточні секунди кратні 10, очищуємо інтервал та резолвимо проміс з рядком "Поточні секунди кратні 10!".
